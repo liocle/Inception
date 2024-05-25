@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# Ignore Docker data volumes
+/var/lib/mysql
+
+# General
+.vscode
+*.code-workspace
+*.swp
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+.DS_Store
