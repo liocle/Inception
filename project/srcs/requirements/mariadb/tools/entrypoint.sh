@@ -1,12 +1,11 @@
 #!/bin/sh
 
-
 # mariadb_install_db (mysql_install_db is a symlink to mariadb version) initializes MariaDB data directory
 # Being run as root, it requires --user=mysql so that it can be further run by user mysql
 if [ ! -d /var/lib/mysql ]; then
 	echo "Initializing MariaDB data directory..."
-/usr/bin/mariadb_install_db --datadir=/var/lib/mysql --user=mysql
-	echo "Dabase initialized."
+	mysql_install_db --datadir=/var/lib/mysql --user=mysql
+	echo "Database initialized."
 fi
 
 # Set folders and permissions
@@ -26,6 +25,4 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
 
-EXPOSE 3306
-
-exec mariadb
+exec mysqld_safe
