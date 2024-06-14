@@ -22,16 +22,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'database_name_here' );
+define( 'DB_NAME', 'DATABASE_NAME_HERE' );
 
 /** Database username */
-define( 'DB_USER', 'username_here' );
+define( 'DB_USER', getenv('USERNAME_HERE' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'password_here' );
+define( 'DB_PASSWORD', getenv('PASSWORD_HERE' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', getenv('DB_HOST_HERE' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -50,14 +50,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'auth_key_here' );
-define( 'SECURE_AUTH_KEY',  'secure_auth_key_here' );
-define( 'LOGGED_IN_KEY',    'logged_in_key_here' );
-define( 'NONCE_KEY',        'nonce_key_here' );
-define( 'AUTH_SALT',        'auth_salt_here' );
-define( 'SECURE_AUTH_SALT', 'secure_auth_salt_here' );
-define( 'LOGGED_IN_SALT',   'logged_in_salt_here' );
-define( 'NONCE_SALT',       'nonce_salt_here' );
+define( 'AUTH_KEY',         getenv('AUTH_KEY_HERE' );
+define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY_HERE' );
+define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY_HERE' );
+define( 'NONCE_KEY',        getenv('NONCE_KEY_HERE' );
+define( 'AUTH_SALT',        getenv('AUTH_SALT_HERE' );
+define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT_HERE' );
+define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT_HERE' );
+define( 'NONCE_SALT',       getenv('NONCE_SALT_HERE' );
 
 /**#@-*/
 
@@ -67,7 +67,7 @@ define( 'NONCE_SALT',       'nonce_salt_here' );
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
- = 'wp_iNCePTioN_';
+ $table_prefix = 'wp_iNCePTioN_';
 
 /**
  * For developers: WordPress debugging mode.
