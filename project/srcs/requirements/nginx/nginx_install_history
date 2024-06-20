@@ -1,0 +1,9 @@
+   0 cat /etc/*rel*
+   1 apk add openssl curl ca-certificates
+   2 printf "%s%s%s\n" "http://nginx.org/packages/alpine/v" `egrep -o '^[0-9]+\.[0-9]+' /etc/alpine-release`  "/main" | sudo tee -a /etc/apk/repositories
+   3 printf "%s%s%s\n" "http://nginx.org/packages/alpine/v" `egrep -o '^[0-9]+\.[0-9]+' /etc/alpine-release`  "/main" | tee -a /etc/apk/repositories
+   4 curl -o /tmp/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub
+   5 openssl rsa -pubin -in /tmp/nginx_signing.rsa.pub -text -noout
+   6 mv /tmp/nginx_signing.rsa.pub /etc/apk/keys/
+   7 apk add nginx
+   8 history > /root/history_installing_nginx_in_container
