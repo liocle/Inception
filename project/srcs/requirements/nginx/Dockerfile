@@ -1,6 +1,7 @@
 FROM alpine:3.19
 
-## https://wiki.alpinelinux.org/wiki/Nginx
+# This docker file builds the NGINX container, installs necessary packages, generates SSL certificates, copies configuration files, and starts NGINX in the foreground.
+# https://wiki.alpinelinux.org/wiki/Nginx
 
 # Install prerequisites and nginx from Alpine repository
 RUN apk add --no-cache \
