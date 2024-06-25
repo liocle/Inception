@@ -4,6 +4,9 @@
 # Ignore Docker data volumes
 /var/lib/mysql
 
+# output from copy files to clipboard script cat_project_to_clipboard_and_file.sh
+combined_output.txt 
+
 # General
 .vscode
 *.code-workspace
