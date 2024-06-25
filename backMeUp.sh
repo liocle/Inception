@@ -1,6 +1,6 @@
 #!/bin/bash  
 
-RSYNC_OPTIONS="-chavuP"
+RSYNC_OPTIONS="-chavuP --exclude='*.swp'"
 
 if [ "$1" == "--dry" ]; then
 	echo "This is a dry run..."
