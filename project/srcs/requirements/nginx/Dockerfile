@@ -4,7 +4,7 @@ FROM alpine:3.19.1
 ## https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/
 #
 # Install prerequisites
-RUN apk add openssl curl ca-certificates
+RUN apk add --no-cache openssl curl ca-certificates
 
 ########################################
 # Set up the apk repository for stable nginx packages
@@ -23,15 +23,14 @@ RUN openssl req -x509 -newkey rsa:4096 -keyout ${NGINX_HOST_DOMAIN}.key -out ${N
 ################################################################################
 ## https://wiki.alpinelinux.org/wiki/Nginx
 # Install nginx 
-RUN apk add nginx
+RUN apk add --no-cache nginx
 
 # create new user and group for nginx
 RUN adduser -D -g 'www' www
 
 # Create a directory for html files
 RUN mkdir /www
-RUN chown -R www:www /var/lib/nginx
-RUN chown -R www:www /www
+RUN chown -R www:www /var/lib/nginx /www
 
 # Backup of original nginx.conf file 
 RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig

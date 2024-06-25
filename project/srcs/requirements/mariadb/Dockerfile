@@ -1,7 +1,7 @@
 # ~/project/srcs/requirements/mariadb/Dockerfile
 FROM alpine:3.19.1
 
-RUN apk update && apk --no-cache add mariadb mariadb-client
+RUN apk add --no-cache mariadb mariadb-client
 
 EXPOSE 3306
 
