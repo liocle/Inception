@@ -1,42 +1,28 @@
-FROM alpine:3.19.1
+FROM alpine:3.19
 
-################################################################################
-## https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/
-#
-# Install prerequisites
-RUN apk add --no-cache openssl curl ca-certificates
-
-########################################
-# Set up the apk repository for stable nginx packages
-WORKDIR /cert-build
-RUN printf "%s%s%s\n" "http://nginx.org/packages/alpine/v" `egrep -o '^[0-9]+\.[0-9]+' /etc/alpine-release`  "/main" | tee -a /etc/apk/repositories
-# Import an official nginx signing key so apk could verify the packages authenticity
-RUN curl -o nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub
-# Check the downloaded file contains the proper key
-RUN openssl rsa -pubin -in nginx_signing.rsa.pub -text -noout > nginx_signing.rsa.pub_Modulus_obtained.log
-# Move the key to apk trusted keys storage
-RUN mv nginx_signing.rsa.pub /etc/apk/keys/
-
-########################################
-RUN openssl req -x509 -newkey rsa:4096 -keyout ${NGINX_HOST_DOMAIN}.key -out ${NGINX_HOST_DOMAIN}.crt -sha256 -days 365 -nodes -subj "/CN=${NGINX_HOST_DOMAIN}"
-
-################################################################################
 ## https://wiki.alpinelinux.org/wiki/Nginx
-# Install nginx 
-RUN apk add --no-cache nginx
 
-# create new user and group for nginx
-RUN adduser -D -g 'www' www
+# Install prerequisites and nginx from Alpine repository
+RUN apk add --no-cache \
+    nginx \
+    openssl \
+    curl \
+    ca-certificates
 
-# Create a directory for html files
-RUN mkdir /www
-RUN chown -R www:www /var/lib/nginx /www
+# Create a directory for HTML files and set permissions
+RUN mkdir -p /www /etc/nginx/certs \
+    && chown -R nginx:nginx /var/lib/nginx /www
 
-# Backup of original nginx.conf file 
-RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+# Generate SSL certificates
+RUN openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/certs/${NGINX_HOST_DOMAIN}.key -out /etc/nginx/certs/${NGINX_HOST_DOMAIN}.crt -sha256 -days 365 -nodes -subj "/CN=${NGINX_HOST_DOMAIN}"
 
+# Copy configuration files
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/default.conf /etc/nginx/http.d/default.conf
 
 # Expose port for HTTPS
 EXPOSE 443
 
+# Start nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
 
