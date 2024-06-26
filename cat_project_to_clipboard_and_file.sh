@@ -15,6 +15,7 @@ FILES_TO_SEARCH=(
 	"nginx.conf"
 	"mariadb-server.cnf"
 	"wp-config.php"
+	".env"
 )
 
 # Function to search and concatenate files
@@ -51,6 +52,7 @@ echo "3. Docker Compose"
 echo "4. Mariadb"
 echo "5. Nginx"
 echo "6. WordPress"
+echo "7. .env"
 read -p "Enter your choice (1-6): " choice
 
 case $choice in
@@ -61,24 +63,28 @@ case $choice in
 		done
 		;;
 	2)
-		# Concatenate Makefile
+		# Copy Makefile
 		concatenate_files "Makefile"
 		;;
 	3)
-		# Concatenate Docker Compose file
+		# Copy Docker Compose file
 		concatenate_files "docker-compose.yml"
 		;;
 	4)
-		# Concatenate Mariadb files
+		# Copy Mariadb files
 		concatenate_service_files "./project/srcs/requirements/mariadb"
 		;;
 	5)
-		# Concatenate Nginx files
+		# Copy Nginx files
 		concatenate_service_files "./project/srcs/requirements/nginx"
 		;;
 	6)
-		# Concatenate WordPress files
+		# Copy WordPress files
 		concatenate_service_files "./project/srcs/requirements/wordpress"
+		;;
+	7)
+		# Copy .env files
+		concatenate_files ".env"
 		;;
 	*)
 		echo "Invalid choice. Exiting."
