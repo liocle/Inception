@@ -23,6 +23,7 @@ COPY conf/default.conf /etc/nginx/http.d/default.conf
 
 # Expose port for HTTPS
 EXPOSE 443
+VOLUME /var/log/nginx
 
 # Start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]

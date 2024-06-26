@@ -14,5 +14,6 @@ combined_output.txt
 Session.vim
 Sessionx.vim
 .netrwhist
+.bak
 *~
 .DS_Store
