@@ -5,8 +5,8 @@ all:
 	if ! grep -q "www.lclerc.42.fr" /etc/hosts; then \
 		echo "127.0.0.1 www.lclerc.42.fr" >> /etc/hosts; \
 	fi
-	mkdir -p /home/lclerc/data/mariadb-data
-	mkdir -p /home/lclerc/data/wordpress-data
+	mkdir -p /data/mariadb_data
+	mkdir -p /data/wordpress_data
 	docker-compose -f srcs/docker-compose.yml build
 	docker-compose -f srcs/docker-compose.yml up -d
 	
@@ -15,8 +15,8 @@ clean:
 
 fclean: clean
 	sed -i '/lclerc\.42\.fr/d' /etc/hosts
-	rm -rf /home/lclerc/data/mariadb-data
-	rm -rf /home/lclerc/data/wordpress-data
+	rm -rf /data/mariadb_data
+	rm -rf /data/wordpress_data
 	docker system prune -f
 
 re: fclean all
