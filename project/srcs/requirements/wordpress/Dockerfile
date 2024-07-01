@@ -27,10 +27,14 @@ RUN chmod +x wp-cli.phar
 RUN mkdir /wordpress 
 RUN mv wp-cli.phar /wordpress/wp
 
-RUN /wordpress/wp core download --path=/var/www/html
+## RUN /wordpress/wp core download --path=/var/www/html
+RUN wget https://wordpress.org/wordpress-6.4.tar.gz -P /var/www/html 
+RUN tar -xzf /var/www/html/wordpress-6.4.tar.gz
+RUN rm /var/www/html/wordpress-6.4.tar.gz
 
+WORKDIR /var/www/html/wordpress
 EXPOSE 9000
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 
