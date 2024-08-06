@@ -67,7 +67,7 @@ define( 'NONCE_SALT',       getenv('NONCE_SALT_HERE' ));
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
- $table_prefix = 'wp_iNCePTioN';
+ $table_prefix = 'wp_inception';
 
 /**
  * For developers: WordPress debugging mode.
@@ -81,11 +81,14 @@ define( 'NONCE_SALT',       getenv('NONCE_SALT_HERE' ));
  *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
+
+// Enable Debug logging to the /wp-content/debug.log file
+define( 'WP_DEBUG_LOG', true );
 
 /* Add any custom values between this line and the stop editing line. */
 
-
+define('FORCE_SSL_ADMIN', true);
 
 /* That's all, stop editing! Happy publishing. */
 

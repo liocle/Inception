@@ -54,7 +54,6 @@
  ##   # chown mysql:mysql /var/log/mysql/error.log
  ##   
  # #   exec mysqld_safe
-
  #!/bin/bash
 
 # Create necessary directories and set permissions
@@ -67,26 +66,33 @@ chown -R mysql:mysql /var/log/mysql
 # Initialize MySQL data directory
 mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
+# Debugging: Print variable values to check if they are set correctly
+echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+echo "MYSQL_DATABASE=${DB_NAME}"
+echo "MYSQL_USER=${MYSQL_USER}"
+echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+
 # Configure MySQL
 mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 
-DELETE FROM	mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='';
 DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
-CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE} CHARACTER SET utf8 COLLATE utf8_general_ci;
-CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED by '${MARIADB_PASSWORD}';
-GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%';
-
+CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${MYSQL_USER}'@'%';
 
 # Flush privileges to apply changes
 FLUSH PRIVILEGES;
 EOF
 
 # Start MariaDB server with custom configuration file
-exec mariadbd
+echo 'Exec:ing into mysqld_safe'
+exec mysqld_safe
+

@@ -18,7 +18,7 @@
 
 FROM alpine:3.18
 
-RUN apk update && apk add mariadb mariadb-client openrc
+RUN apk update && apk add mariadb mariadb-client
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 RUN chmod 440 /etc/my.cnf.d/mariadb-server.cnf

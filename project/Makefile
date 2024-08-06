@@ -71,15 +71,15 @@ clean-data: clean remove-data-path create-data-path
 
 .PHONY: create-data-path
 create-data-path:
-	mkdir -p /data/wordpress
-	mkdir -p /data/mariadb
-	mkdir -p /data/nginx-logs
+	mkdir -p /home/${USER}/data/wordpress
+	mkdir -p /home/${USER}/data/mariadb
+	mkdir -p /home/${USER}/data/nginx-logs
 
 .PHONY: remove-data-path
 remove-data-path:
-	doas rm -rf /data/wordpress
-	doas rm -rf /data/mariadb
-	doas rm -rf /data/nginx-logs
+	sudo rm -rf /home/${USER}/data/wordpress
+	sudo rm -rf /home/${USER}/data/mariadb
+	sudo rm -rf /home/${USER}/data/nginx-logs
 
  # .PHONY: dev
  # dev:
