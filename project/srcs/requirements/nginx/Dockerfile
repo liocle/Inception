@@ -13,11 +13,11 @@ RUN apk add --no-cache \
 
 ARG NGINX_HOST_DOMAIN
 ENV NGINX_HOST_DOMAIN=lclerc.42.fr
-RUN if ! getent group nginx_system_user > /dev/null; then addgroup -S nginx_system_user; fi
-RUN adduser -S nginx_system_user -G nginx_system_user
+RUN if ! getent group www > /dev/null; then addgroup -S www; fi
+RUN adduser -S www -G www
 # Create a directory for HTML files and set permissions
 RUN mkdir -p /www /etc/nginx/ssl \
-            && chown -R nginx_system_user:nginx_system_user /var/lib/nginx /www
+            && chown -R www:www /var/lib/nginx /www
 
 # Generate SSL certificates
 # RUN openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/lclerc.42.fr.key -out /etc/nginx/ssl/lclerc.42.fr.crt -sha256 -days 365 -nodes -subj "/CN=lclerc.42.fr"

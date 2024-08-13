@@ -1,38 +1,42 @@
 #!/bin/bash
 echo "Starting WordPress setup script."
 
-# Update php-fpm configuration to use correct user and address
-sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php82/php-fpm.d/www.conf
-sed -i 's/;listen.owner = nobody/listen.owner = www/' /etc/php82/php-fpm.d/www.conf
-sed -i 's/;listen.group = nobody/listen.group = www/' /etc/php82/php-fpm.d/www.conf
-sed -i 's/user = nobody/user = www/' /etc/php82/php-fpm.d/www.conf
-sed -i 's/group = nobody/group = www/' /etc/php82/php-fpm.d/www.conf
-
 echo "Waiting for MariaDB to start..."
 
 # Check for MariaDB readiness
+attempts=0
 until mysql -h "$DB_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SHOW DATABASES;" > /dev/null 2>&1; do
-    echo "MariaDB is unavailable - waiting..."
+    attempts=$((attempts + 1))
+    if [ $attempts -ge 10 ]; then
+        echo "Could not reach MariaDB"
+        echo "MariaDB is unavailable - waiting..."
+    fi
     sleep 5
 done
 
 echo "MariaDB is up - proceeding with WordPress setup."
+#
+# Set HTTP_HOST and other server variables for CLI commands to avoid PHP warnings
+export SERVER_NAME=$NGINX_HOST_DOMAIN
+export HTTP_HOST=$NGINX_HOST_DOMAIN
+export SERVER_PORT=443
+export SERVER_PROTOCOL=https
 
 # Check if WordPress is already installed
-if ! wp core is-installed --allow-root --path=/var/www/html; then
+if ! wp core is-installed --path=/var/www/html > /dev/null 2>&1; then
     echo "WordPress is not installed. Proceeding with installation."
-    
+
     wp core download --allow-root --path=/var/www/html
 
     # Configure WordPress
-    if [ ! -f /var/www/html/wp-config.php ]; then
-        wp config create --allow-root \
-            --dbhost="${DB_HOST}" \
-            --dbname="${DB_NAME}" \
-            --dbuser="${MYSQL_USER}" \
-            --dbpass="${MYSQL_PASSWORD}" \
-            --path=/var/www/html
-    fi
+    wp config create --allow-root \
+        --dbhost="${DB_HOST}" \
+        --dbname="${DB_NAME}" \
+        --dbuser="${MYSQL_USER}" \
+        --dbpass="${MYSQL_PASSWORD}" \
+        --path=/var/www/html
+
+    #wp db create --path=/var/www/html
 
     # Install WordPress
     wp core install --allow-root \
@@ -47,8 +51,6 @@ if ! wp core is-installed --allow-root --path=/var/www/html; then
     wp user create "${WP_USER}" "${WP_EMAIL}" \
         --role=author \
         --user_pass="${WP_PASSWORD}" \
-        --allow-root \
-        --path=/var/www/html
 
     wp cache flush --allow-root --path=/var/www/html
     wp theme install inspiro --activate --allow-root --path=/var/www/html
