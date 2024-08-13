@@ -5,7 +5,6 @@ FROM alpine:3.19
 
 WORKDIR /
 
-
 # Install prerequisites and nginx from Alpine repository
 RUN apk add --no-cache \
         nginx \

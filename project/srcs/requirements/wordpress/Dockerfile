@@ -4,9 +4,8 @@
 # https://wiki.alpinelinux.org/wiki/Nginx_with_PHP
 # https://developer.wordpress.org/advanced-administration/before-install/howto-install/
 # ~/project/srcs/requirements/wordpress/Dockerfile
-# ~/project/srcs/requirements/wordpress/Dockerfile
 
-FROM alpine:3.19.1
+FROM alpine:3.19
 
 WORKDIR /var/www/html
 
@@ -30,7 +29,6 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 WORKDIR /var/www/html
 EXPOSE 9000
-
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 

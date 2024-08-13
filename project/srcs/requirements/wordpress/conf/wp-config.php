@@ -34,7 +34,6 @@ if (!isset($_SERVER['HTTPS'])) {
 define( 'DB_NAME', getenv('DB_NAME' ));
 define( 'DB_USER', getenv('MYSQL_USER' ));
 define( 'DB_PASSWORD', getenv('DB_PASSWORD' ));
-#define('DB_HOST', 'mariadb:3306');
 define( 'DB_HOST', getenv('DB_HOST' ));
 
 /** Database charset to use in creating database tables. */
@@ -54,26 +53,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-##define( 'AUTH_KEY',         getenv('AUTH_KEY_HERE' ));
-##define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY_HERE' ));
-##define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY_HERE' ));
-##define( 'NONCE_KEY',        getenv('NONCE_KEY_HERE' ));
-##define( 'AUTH_SALT',        getenv('AUTH_SALT_HERE' ));
-##define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT_HERE' ));
-##define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT_HERE' ));
-##define( 'NONCE_SALT',       getenv('NONCE_SALT_HERE' ));
-
-define( 'AUTH_KEY',  '}zeH.o>I|bIQ4s:hevQ4V39Y)ea16<+Vj%Qa1Z9Lv2eNhc+x>/Hq7BE8J^7s=ZBd');       
-define( 'SECURE_AUTH_KEY', 'ixhrg7Q>]N1RxC^iqK,;i0-[F}[%Res`3^fuAWxbA[s=@q(f(K4X5Xu]L5s!ClC~');
-define( 'LOGGED_IN_KEY',  'V{-DK-7dG_PqLFPB|ENrZDoDYWSfe-e29%L|<)<0+<ulsfPT]Q>Oj8fb-_3[CTRO');
-define( 'NONCE_KEY', '3}rN+hLC`riD1Lx6r7JPK_yJh6+:*ck4^r!c,&a5NL}oo g1=v{`LUc1-&JZ:<+u');
-define( 'AUTH_SALT', 'xB*jrQP>b08E8+Bp+~k|##-x#u1.+B4hBG]H`q:6v%H~7QtU:|m:6GF^83A8a|aQ' );
-define( 'SECURE_AUTH_SALT', 'x|SxF({H-uPI[1q%-|X,8}x`&~*|2*xS6)L0#9r+7T5rmZnp?Xqod4I9UP]%(C*j' );
-define( 'LOGGED_IN_SALT', '`W8^Y*zaBy2VS1T2vQT-njOqfem,z(ZWKextSMF3{_8HYy`EYV(FINv(qM,JxI-Q' );
-define( 'NONCE_SALT', 'pBk%cBs[Z+%1OCMtgC! b|I-jc@v=W;$$upOeMhXQ.hY(Pk!BhF|]>gh|{1uCt4|0');
-
-## ## Generated from https://api.wordpress.org/secret-key/1.1/salt/ 
-
+define( 'AUTH_KEY',         getenv('AUTH_KEY_HERE' ));
+define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY_HERE' ));
+define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY_HERE' ));
+define( 'NONCE_KEY',        getenv('NONCE_KEY_HERE' ));
+define( 'AUTH_SALT',        getenv('AUTH_SALT_HERE' ));
+define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT_HERE' ));
+define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT_HERE' ));
+define( 'NONCE_SALT',       getenv('NONCE_SALT_HERE' ));
 
 /**#@-*/
 
@@ -104,7 +91,7 @@ define( 'WP_DEBUG_LOG', true );
 
 /* Add any custom values between this line and the stop editing line. */
 
-define('FORCE_SSL_ADMIN', true);
+#define('FORCE_SSL_ADMIN', true);
 
 /* That's all, stop editing! Happy publishing. */
 
