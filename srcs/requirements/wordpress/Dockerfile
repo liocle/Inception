@@ -20,7 +20,10 @@ RUN adduser -S -H -G www www
 
 # Setting up environment and install PHP
 RUN apk update && apk upgrade 
-RUN apk add --no-cache php82 php82-fpm php82-mysqli php82-mbstring curl libcurl php82-curl libzip php82-zip php82-phar mysql-client 
+RUN apk add --no-cache \
+    php82 php82-fpm php82-mysqli php82-mbstring curl libcurl php82-curl \
+    libzip php82-zip php82-phar mysql-client \
+    php82-gd php82-dom php82-exif php82-fileinfo php82-imagick php82-iconv php82-intl # Plugins to manage images and graphic functions. 
 
 # Installing wp-cli, the command line tool for interacting with and managing WordPress sites.
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
