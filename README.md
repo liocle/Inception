@@ -26,6 +26,40 @@ The project leverages Docker to create a small, isolated infrastructure with the
 - **Domain Name**: Point your domain name to your VM’s public IP address.
 - **Environment Variables**: Set environment variables in a `.env` file for credentials and configurations (details below).
 
+## Environment Variables
+
+This project uses a `.env` file to manage sensitive information and configuration. A `.env.example` file is provided as a template. To use it:
+
+1. Copy `.env.example` to `.env`:
+
+   ```bash
+   cp ./srcs/.env.example ./srcs/.env
+   ```
+2. Replace placeholder values in .env with your specific settings:
+
+     ### Required Environment Variables
+
+     **Database Credentials**:
+     - `MYSQL_ROOT_PASSWORD`: Root password for MySQL.
+     - `MYSQL_USER`: MySQL user for WordPress.
+     - `MYSQL_PASSWORD`: Password for the specified MySQL user.
+     - `DB_NAME`: Database name for WordPress.
+     - `DB_PASSWORD`: Password for accessing the WordPress database.
+     - `DB_HOST`: Database host, typically `localhost` or the service name if in Docker, e.g., `mariadb`.
+
+     **WordPress Site Configuration**:
+     - `WP_SITE_TITLE`: (Optional) Title for the WordPress site.
+     - `WP_USER`: Default WordPress user name.
+     - `WP_PASSWORD`: Password for the default WordPress user.
+     - `WP_EMAIL`: Email for the default WordPress user.
+     - `WP_ADMIN_USER`: WordPress admin username.
+     - `WP_ADMIN_PASSWORD`: Password for the WordPress admin.
+     - `WP_ADMIN_EMAIL`: Email for the WordPress admin.
+
+     **WordPress Salts and Keys**:
+     - Generate fresh values for each deployment using the [WordPress Salt Generator](https://api.wordpress.org/secret-key/1.1/salt/) for improved security.
+
+
 ## Getting Started
 1. Clone the repository
 2. Configure environment variables (a dummy one is included for reference)
