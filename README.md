@@ -73,8 +73,8 @@ This project uses a `.env` file to manage sensitive information and configuratio
 .
 ├── Makefile            # Automates the build and setup process
 ├── docker-compose.yml  # Defines services, networks, and volumes
-├── .env                # Template for environment variables
 └── srcs
+    ├── .env.example    # Template for environment variables
     ├── nginx           # NGINX configuration
     ├── wordpress       # WordPress configuration
     └── mariadb         # MariaDB configuration
