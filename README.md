@@ -86,9 +86,14 @@ This project uses a `.env` file to manage sensitive information and configuratio
 - **MariaDB**: A separate container with a dedicated volume to store the WordPress database, ensuring data persistence and reliability.
 - **Restart Policies**: Containers are set to restart automatically, ensuring uptime and resilience in case of errors.
 
+
 ## Deployment
 
-The Inception project is deployed on an Oracle Cloud virtual machine with a custom domain, providing a live, accessible demonstration of the setup. This configuration, leveraged as my  [portfolio](https://portfolio.clerc.fi), is manually set up and managed without automated deployment processes.
+🚧 **Temporary Notice:**  
+The Inception project is typically deployed on an Oracle Cloud virtual machine with a custom domain. However, due to a **temporary issue with Oracle Cloud account access**, the live demonstration at [portfolio.clerc.fi](https://portfolio.clerc.fi) is currently unavailable.  
+
+This does not affect the project's reproducibility—by following the setup steps, you can deploy it on any compatible cloud or local infrastructure.
+
 
 ## Future Enhancements
 
