@@ -87,14 +87,6 @@ This project uses a `.env` file to manage sensitive information and configuratio
 - **Restart Policies**: Containers are set to restart automatically, ensuring uptime and resilience in case of errors.
 
 
-## Deployment
-
-🚧 **Temporary Notice:**  
-The Inception project is typically deployed on an Oracle Cloud virtual machine with a custom domain. However, due to a **temporary issue with Oracle Cloud account access**, the live demonstration at [portfolio.clerc.fi](https://portfolio.clerc.fi) is currently unavailable.  
-
-This does not affect the project's reproducibility—by following the setup steps, you can deploy it on any compatible cloud or local infrastructure.
-
-
 ## Future Enhancements
 
 Potential improvements include:
